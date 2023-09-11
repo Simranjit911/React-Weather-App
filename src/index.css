@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.home-div {
+  background-color: linear-gradient(rgb(21, 27, 75, 5), rgba(5, 11, 43, 10));
+  
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  filter: blur(5px);
+  z-index: -1000;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+}
+.details {
+  background-color: rgba(17, 15, 59, 0.656);
+  border-radius: 5px;
+}
