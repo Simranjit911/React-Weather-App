@@ -59,7 +59,7 @@ const bgimages={
 
 
 export const iconsimg={
-    "clear sky":"http://openweathermap.org/img/wn/01d@2x.png",
+    "clear":"http://openweathermap.org/img/wn/01d@2x.png",
     "few clouds":"http://openweathermap.org/img/wn/02d@2x.png",
     "scatered":"http://openweathermap.org/img/wn/03d@2x.png",
     "broken":"http://openweathermap.org/img/wn/04d@2x.png",
@@ -77,35 +77,35 @@ export function imgsetter(name){
 
   console.log(name)
   console.log(randomIndex)
-if(name==="01n"){
-  iconimg=iconsimg["clear sky"]
+if(name==="01d"){
+  iconimg=iconsimg["clear"]
   bgurl=bgimages.clear[randomIndex]
 }
-if(name==="02n"){
+if(name==="02d"){
   iconimg=iconsimg["few clouds"]
   bgurl=bgimages.few[randomIndex]
 }
-if(name==="03n"){
+if(name==="03d"){
   iconimg=iconsimg["scatered"]
   bgurl=bgimages.scattered[randomIndex]
 }
-if(name==="04n"){
+if(name==="04d"){
   iconimg=iconsimg["broken"]
   bgurl=bgimages.broken[randomIndex]
 }
-if(name==="09n"){
+if(name==="09d"){
   iconimg=iconsimg["shower"]
   bgurl=bgimages.showerrain[randomIndex]
 }
-if(name==="10n"){
+if(name==="10d"){
   iconimg=iconsimg["rain"]
   bgurl=bgimages.rain[randomIndex]
 }
-if(name==="11n"){
+if(name==="11d"){
   iconimg=iconsimg["thunderstorm"]
   bgurl=bgimages.thunderstorm[randomIndex]
 }
-if(name==="13n"){
+if(name==="13d"){
   iconimg=iconsimg["snow"]
   bgurl=bgimages.snow[randomIndex]
 }

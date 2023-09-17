@@ -9,6 +9,7 @@ import { TbTemperaturePlus } from "react-icons/tb";
 import { BsSpeedometer2 } from "react-icons/bs";
 
 import { iconimg, bgurl, imgsetter } from "./assets/Bgimages";
+
 const Home = () => {
   async function getData() {
     if(city.length<=2){
@@ -32,7 +33,7 @@ const Home = () => {
       });
     }
     setTimeout(()=>{
-      imgsetter(weatherData.weather[0].icon);
+    imgsetter(weatherData.weather[0].icon);  
 
     },1000)
 
@@ -40,7 +41,7 @@ const Home = () => {
   
   const [city, setcity] = useState("Delhi");
   const [weatherData, setweatherData] = useState({});
-  const { dt, name, main, wind, sys } = weatherData;
+  const {dt, name, main, wind } = weatherData;
 
   useEffect(() => {
     getData();   
@@ -48,7 +49,7 @@ const Home = () => {
 
   console.log(weatherData);
   setTimeout(() => {
-    imgsetter(weatherData.weather[0].icon);
+    imgsetter(weatherData.weather[0].icon);  
     console.log(bgurl);
     console.log(iconimg);
     
@@ -67,10 +68,7 @@ const Home = () => {
     <>
       {weatherData.weather && weatherData.weather[0] && (
         <div>
-          {
-    imgsetter(weatherData.weather[0].icon)
-
-          }
+          {imgsetter(weatherData.weather[0].icon)}
           <div
             className="home-div"
             style={{
@@ -89,7 +87,7 @@ const Home = () => {
                   handlekey(e);
                 }}             
                 onChange={(e) => setcity(e.target.value)}
-                type="text"
+                type="search"
                 placeholder="Enter City name"
                 className="outline-none text-black border-2 border-indigo-300 rounded-md shadow-lg  focus:border-indigo-700"
               />
@@ -102,17 +100,19 @@ const Home = () => {
               </button>
             </div>
             {/* Details */}
-            <div className="md:w-[40%] w-[85%] rounded-xl mx-auto flex lg:flex-row flex-col justify-evenly px-3 details">
+            <div className="md:w-[40%] w-[85%] pb-3 md:pb-0 rounded-xl mx-auto flex lg:flex-row flex-col justify-evenly px-3 details">
               {/* image */}
               <div className="text-lg flex py-5  md:py-10  gap-3 mx-auto   px-2 justify-evenly">
                 <img
-                  src={`${iconimg}`}
+                  src={iconimg}
                   className="md:w-[120px] w-[80px] object-fit"
                   alt=""
                 />
                 {/* Text */}
                 <div className="m-auto flex flex-col gap-0">
                   <p className="text-sm">
+             
+                    {/* {new Date().toLocaleTimeString()} */}
                     {new Date(Number(dt) * 1000).toLocaleTimeString()}
                   </p>
                   <p className="md:text-2xl text-lg">
