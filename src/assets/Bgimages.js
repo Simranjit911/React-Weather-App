@@ -77,39 +77,39 @@ export function imgsetter(name){
 
   console.log(name)
   console.log(randomIndex)
-if(name==="01d"){
+if(name==="01d"|| name === "01n"){
   iconimg=iconsimg["clear"]
   bgurl=bgimages.clear[randomIndex]
 }
-if(name==="02d"){
+if(name==="02d" ||name==="02n"){
   iconimg=iconsimg["few clouds"]
   bgurl=bgimages.few[randomIndex]
 }
-if(name==="03d"){
+if(name==="03d" || name==="03n"){
   iconimg=iconsimg["scatered"]
   bgurl=bgimages.scattered[randomIndex]
 }
-if(name==="04d"){
+if(name==="04d" || name==="04n"){
   iconimg=iconsimg["broken"]
   bgurl=bgimages.broken[randomIndex]
 }
-if(name==="09d"){
+if(name==="09d" || name==="09n"){
   iconimg=iconsimg["shower"]
   bgurl=bgimages.showerrain[randomIndex]
 }
-if(name==="10d"){
+if(name==="10d" || name==="10n"){
   iconimg=iconsimg["rain"]
   bgurl=bgimages.rain[randomIndex]
 }
-if(name==="11d"){
+if(name==="11d" ||name==="11n"){
   iconimg=iconsimg["thunderstorm"]
   bgurl=bgimages.thunderstorm[randomIndex]
 }
-if(name==="13d"){
+if(name==="13d" || name==="13n"){
   iconimg=iconsimg["snow"]
   bgurl=bgimages.snow[randomIndex]
 }
-if(name==="50n"){
+if(name==="50d  "||name==="50n"){
   iconimg=iconsimg["mist"]
   bgurl=bgimages.clear[randomIndex]
 }

@@ -17,11 +17,6 @@ const Home = () => {
     }
     let api = "42d26a6a37f7db27bcab4557180f9ffc";
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city.trim().toLowerCase()}&appid=${api}&units=metric`;
-    // fetch(url)
-    //   .then((res) => res.json())
-    //   .then((data) => setweatherData(data))
-    //   .catch((err) => console.log(err));
-    // console.log(weatherData);
     let res = await fetch(url);
     let dt = await res.json();
     if (res.status == 200) {
@@ -33,7 +28,7 @@ const Home = () => {
       });
     }
     setTimeout(()=>{
-    imgsetter(weatherData.weather[0].icon);  
+    imgsetter(dt.weather[0].icon);  
 
     },1000)
 
@@ -49,7 +44,7 @@ const Home = () => {
 
   console.log(weatherData);
   setTimeout(() => {
-    imgsetter(weatherData.weather[0].icon);  
+    // imgsetter(weatherData.weather[0].icon);  
     console.log(bgurl);
     console.log(iconimg);
     
