@@ -70,12 +70,13 @@ export const iconsimg={
     "mist":"http://openweathermap.org/img/wn/50d@2x.png",
   
 }
-const randomIndex = Math.floor(Math.random() * 3);
 let iconimg="http://openweathermap.org/img/wn/01d@2x.png"
 let bgurl=""
 export function imgsetter(name){
+  const randomIndex = Math.floor(Math.random() * 3);
 
   console.log(name)
+  console.log(randomIndex)
 if(name==="01n"){
   iconimg=iconsimg["clear sky"]
   bgurl=bgimages.clear[randomIndex]
@@ -110,7 +111,7 @@ if(name==="13n"){
 }
 if(name==="50n"){
   iconimg=iconsimg["mist"]
-  bgurl=bgimages.few[randomIndex]
+  bgurl=bgimages.clear[randomIndex]
 }
   
   }

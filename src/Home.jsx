@@ -1,101 +1,108 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import toast from "react-hot-toast";
 import "./index.css";
 import { BsSearch } from "react-icons/bs";
 import { PiWindBold } from "react-icons/pi";
 import { CiTempHigh } from "react-icons/ci";
 import { WiHumidity } from "react-icons/wi";
-import {  TbTemperaturePlus } from "react-icons/tb";
+import { TbTemperaturePlus } from "react-icons/tb";
 import { BsSpeedometer2 } from "react-icons/bs";
-import bgimages from "./assets/Bgimages";
-import { iconsimg,iconimg,bgurl,imgsetter } from "./assets/Bgimages";
-const Home = () => { 
- async function getData() {
+
+import { iconimg, bgurl, imgsetter } from "./assets/Bgimages";
+const Home = () => {
+  async function getData() {
+    if(city.length<=2){
+      return toast.error("Enter Atleast 3 Characters")
+    }
     let api = "42d26a6a37f7db27bcab4557180f9ffc";
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}&units=metric`;
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city.trim().toLowerCase()}&appid=${api}&units=metric`;
     // fetch(url)
     //   .then((res) => res.json())
     //   .then((data) => setweatherData(data))
     //   .catch((err) => console.log(err));
     // console.log(weatherData);
-    let res=await fetch(url)
-    let dt=await res.json()
-    if(res.status==200){
-      console.log(dt)
-      setweatherData(dt)
+    let res = await fetch(url);
+    let dt = await res.json();
+    if (res.status == 200) {
+      console.log(dt);
+      setweatherData(dt);
+    } else {
+      return toast.error("City Not Found", {
+        duration: 900,
+      });
+    }
+    setTimeout(()=>{
+      imgsetter(weatherData.weather[0].icon);
+
+    },1000)
+
+  }
+  
+  const [city, setcity] = useState("Delhi");
+  const [weatherData, setweatherData] = useState({});
+  const { dt, name, main, wind, sys } = weatherData;
+
+  useEffect(() => {
+    getData();   
+  }, []);
+
+  console.log(weatherData);
+  setTimeout(() => {
+    imgsetter(weatherData.weather[0].icon);
+    console.log(bgurl);
+    console.log(iconimg);
+    
+  }, 1000);
+  function handlekey(e) {
+    if (e.key!== "Enter") {     
+      return      
     }else{
-    return alert("City Not Found")
+      getData()
+    imgsetter(weatherData.weather[0].icon)
+
     }
   }
 
-
-  const [city, setcity] = useState("Delhi");
-  const [weatherData, setweatherData] = useState({});
-  const { coord, dt, name, main, wind, visibility } = weatherData;
-
-
-
-  useEffect(() => {
-    getData();
-  }, []);
-  console.log(weatherData);
-  setTimeout(()=>{
-
-    imgsetter(weatherData.weather[0].icon)
-    console.log(bgurl)
-    console.log(iconimg)
-  },1000)
-function handlekey(e){
-  if(e.key==="Enter"){
-    alert()
-    getData()
-  }
-}
-function handlechange(e){
-  setcity(e.target.value)
-
-}
-
   return (
     <>
+      {weatherData.weather && weatherData.weather[0] && (
+        <div>
+          {
+    imgsetter(weatherData.weather[0].icon)
 
-      {weatherData.weather && weatherData.weather[0] && (      
-        <div>        
-          {imgsetter(weatherData.weather[0].icon)}
+          }
           <div
             className="home-div"
             style={{
-              backgroundImage:`url(${bgurl})`,
+              backgroundImage: `url(${bgurl})`,
             }}
           ></div>
 
-          <div className=" mx-auto flex flex-col items-center text-white gap-3  h-[100vh]">
-            <div className="flex  items-center gap-2 justify-center pt-12">
+          <div className=" mx-auto flex flex-col items-center  text-white gap-3  h-[100vh]">
+            <div className="flex  items-center gap-2 mt-[6%] justify-center pt-12">
               <input
                 value={city}
-                onChange={handlechange}
+                onKeyDown={(e) => {
+                  if (e.key !== "Enter") {
+                    return 
+                  }
+                  handlekey(e);
+                }}             
+                onChange={(e) => setcity(e.target.value)}
                 type="text"
                 placeholder="Enter City name"
                 className="outline-none text-black border-2 border-indigo-300 rounded-md shadow-lg  focus:border-indigo-700"
               />
 
-              <button
-                onClick={() =>{
-                  if(city.length<=2){
-                    return alert("Enter Aleast 3 Characters")
-                  }                  
-                  getData()
-                } 
-                }
-                className="text-white shadow-xl text-lg hover:scale-105 duration-100"
-                onKeyDown={(e)=>handlekey(e)}
+              <button          
+                onClick={()=>getData()}
+                className="text-white shadow-xl text-lg hover:scale-105 duration-100"     
               >
-               
                 <BsSearch />
               </button>
             </div>
             {/* Details */}
-            <div className="md:w-[40%] w-[85%] pb-3 mx-auto flex lg:flex-row flex-col justify-evenly px-3 details">
+            <div className="md:w-[40%] w-[85%] rounded-xl mx-auto flex lg:flex-row flex-col justify-evenly px-3 details">
               {/* image */}
               <div className="text-lg flex py-5  md:py-10  gap-3 mx-auto   px-2 justify-evenly">
                 <img
@@ -104,18 +111,21 @@ function handlechange(e){
                   alt=""
                 />
                 {/* Text */}
-                <div className="mx-auto">
+                <div className="m-auto flex flex-col gap-0">
                   <p className="text-sm">
                     {new Date(Number(dt) * 1000).toLocaleTimeString()}
                   </p>
-                  <p className="md:text-2xl text-xl">{name}</p>
-                  <p className="md:text-3xl text-3xl">
+                  <p className="md:text-2xl text-lg">
+                    {name}
+                    {/* ,<span className="text-sm">{sys.country}</span>{" "} */}
+                  </p>
+                  <p className="md:text-3xl text-2xl">
                     {weatherData?.weather[0]?.main}
                   </p>
                 </div>
               </div>
               {/* minor details */}
-              <div className="flex flex-col justify-evenly flex-2 mx-auto items-center lg:items-left">
+              <div className="flex flex-col  gap-3 justify-evenly flex-2 m-auto items-center lg:items-left">
                 <p className="flex items-center">
                   <CiTempHigh /> Temp {main?.temp}°C
                 </p>
@@ -140,8 +150,6 @@ function handlechange(e){
           </div>
         </div>
       )}
-
-      
     </>
   );
 };

@@ -1,11 +1,11 @@
-import React from 'react'
-import Home from './Home'
 
+import Home from './Home'
+import { Toaster } from 'react-hot-toast'
 const App = () => {
   return (
     <div>
 <Home/>
-
+<Toaster/>
     </div>
   )
 }
